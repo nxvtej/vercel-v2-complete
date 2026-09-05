@@ -6,7 +6,6 @@ const app = express();
 const PORT = 9000;
 
 require("dotenv").config();
-console.log(require("fs").readdirSync("./"));
 console.log("REDIS_HOST:", process.env.REDIS_HOST);
 
 const {
@@ -20,22 +19,13 @@ const {
 	AWS_SECURITY_GROUP,
 } = process.env;
 
-console.log(
-	"all envs",
-	AWS_ACCESS_KEY_ID,
-	AWS_SECRET_ACCESS_KEY,
-	AWS_CLUSTER,
-	AWS_TASK_DEFINITION,
-	AWS_SUBNET1,
-	AWS_SUBNET2,
-	AWS_SUBNET3,
-	AWS_SECURITY_GROUP
-);
+const useLocalBuild = process.env.LOCAL_BUILD === "1";
+console.log("LOCAL_BUILD:", useLocalBuild ? "enabled" : "disabled");
 
 const Redis = require("ioredis");
 const { Server } = require("socket.io");
 
-const REDISHOST = "";
+const REDISHOST = process.env.REDIS_HOST || "127.0.0.1:6379";
 const subscriber = new Redis(REDISHOST);
 
 subscriber.on("connect", () => console.log("Connected to Redis"));

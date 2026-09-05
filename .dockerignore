@@ -1,0 +1,9 @@
+node_modules
+outputs
+.builds
+.git
+api-server
+build-server
+proxy
+local
+**/node_modules

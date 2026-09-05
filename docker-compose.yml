@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./outputs:/app/outputs
+    environment:
+      - PORT=8080
+      - OUTPUT_DIR=/app/outputs
+      - WORK_DIR=/app/.builds
+      # Set to http://YOUR_EC2_PUBLIC_IP:8080 on EC2 (optional)
+      - PUBLIC_URL=
